@@ -12,6 +12,7 @@ mongo_uri = os.getenv('MONGO_URI')
 client = pymongo.MongoClient(mongo_uri)
 db = client.test
 collection = db['flask']
+todo_collection = db['todo']
 
 app = Flask(__name__)
 @app.route("/")
@@ -34,6 +35,12 @@ def view():
         del i["_id"]
 
     return data
+
+@app.route('/submittodoitem', methods=['POST'])
+def todo():
+    todo_data = dict(request.form)
+    todo_collection.insert_one(todo_data)
+    return 'Todo saved successfully'
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data.json')
 
