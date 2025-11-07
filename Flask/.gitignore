@@ -1,0 +1,44 @@
+# Python virtual environment
+venv/
+env/
+.venv/
+
+# Byte-compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Flask specific files
+instance/ # Flask's instance folder for configuration and data that shouldn't be version controlled
+.flaskenv # Environment variables for Flask, often local
+
+# Database files
+*.sqlite
+*.db
+
+# Log files
+*.log
+
+# Uploaded files (if applicable)
+uploads/
+
+# Test reports/coverage
+.coverage
+htmlcov/
+
+# Distribution / build files
+dist/
+build/
+*.egg-info/
+
+# Environment variable files
+.env
+.flaskenv
