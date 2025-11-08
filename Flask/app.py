@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import os
 import pymongo
 import json
+import random
+import string
 
 load_dotenv()
 
@@ -42,9 +44,11 @@ def todoRoute():
 
 @app.route('/submittodoitem', methods=['POST'])
 def todo():
+    random_id = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
     todo_data = dict(request.form)
+    todo_data['random_id'] = random_id
     todo_collection.insert_one(todo_data)
-    return 'Todo saved successfully'
+    return f'Todo saved successfully. id: {random_id}'
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data.json')
 
