@@ -36,6 +36,10 @@ def view():
 
     return data
 
+@app.route('/todo')
+def todoRoute():
+    return render_template('form.html')
+
 @app.route('/submittodoitem', methods=['POST'])
 def todo():
     todo_data = dict(request.form)
