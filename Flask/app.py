@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import pymongo
 import json
+import hashlib
 
 load_dotenv()
 
@@ -42,9 +43,12 @@ def todoRoute():
 
 @app.route('/submittodoitem', methods=['POST'])
 def todo():
+    random_bytes = os.urandom(16)  # 128-bit random value
+    hash_value = hashlib.sha256(random_bytes).hexdigest()
     todo_data = dict(request.form)
+    todo_data['hash'] = hash_value
     todo_collection.insert_one(todo_data)
-    return 'Todo saved successfully'
+    return f'Todo saved successfully. id: {hash_value}'
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data.json')
 
